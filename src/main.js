@@ -6,8 +6,9 @@ import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
 import VueRouter from 'vue-router'
 import GoogleLogin from 'vue-google-login'
-
+import VueChatScroll from 'vue-chat-scroll';
 Vue.use(GoogleLogin)
+Vue.use(VueChatScroll)
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 Vue.config.productionTip = false
@@ -39,11 +40,10 @@ const router = new VueRouter({
       props:true
 
     },
-  ]
+  ],  
 });
 
 new Vue({
   router,
   render: h => h(App),
-  props:['username']
 }).$mount('#app')

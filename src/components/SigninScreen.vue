@@ -44,7 +44,6 @@
                 name:'',
                 isLogin :false
 
-
             }
         },
         methods: {
@@ -60,13 +59,11 @@
                 axios.post('/login',data)
                 .then(function(response){
                     if (response.status == 200){
-                        data.name = response.data.name;
-                        data.isLogin = true
-                        self.$emit('login',data)
+
+                        self.$emit('login',response.data)
                         self.$router.push('/')
-
-
                     }})
+                
                 
 
             }
