@@ -65,7 +65,11 @@
                         self.$emit('login',data)
                         self.$router.push('/')
 
+                        console.log(response.headers)
+                        var token = response.headers['authorization']
+                        localStorage.setItem("token",token)
 
+                        
                     }})
                 
 
