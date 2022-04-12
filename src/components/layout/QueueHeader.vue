@@ -25,8 +25,10 @@
             <em>User</em>
           </template>
           <b-dropdown-item href="#" v-if="isLogin">{{name}}</b-dropdown-item>
-          <b-dropdown-item href="/signin">Sign Out</b-dropdown-item>
           <b-dropdown-item @click="$router.push('/signin')">Sign in</b-dropdown-item>
+          <b-dropdown-item @click="$router.push('/signup')">Sign up</b-dropdown-item>
+          <b-dropdown-item href="/signin">Sign Out</b-dropdown-item>
+
         </b-nav-item-dropdown>
       </b-navbar-nav>
     </b-collapse>

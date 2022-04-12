@@ -59,12 +59,22 @@
                 axios.post('/login',data)
                 .then(function(response){
                     if (response.status == 200){
+                        data.name = response.data.name;
+                        data.isLogin = true
+                        self.$emit('login',data)
+                        self.$router.push('/')
+
+                        console.log(response.headers)
+                        var token = response.headers['authorization']
+                        localStorage.setItem("token",token)
+
+                        
 
                         self.$emit('login',response.data)
                         self.$router.push('/')
                     }})
                 
-                
+              
 
             }
             
