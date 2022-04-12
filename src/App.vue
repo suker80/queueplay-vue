@@ -19,7 +19,8 @@ export default {
   data() {
     return {
       isLogin : false,
-      username :null
+      username :null,
+      loginData : null,
 
 
     }
@@ -27,8 +28,10 @@ export default {
   methods: {
     loginsuccess: function(data){
       console.log(data)
-      this.isLogin = data.isLogin
+      this.loginData = data
+      this.isLogin = true
       this.username = data.name
+      localStorage.setItem("user",this.loginData)
     }
   },
 }
@@ -39,7 +42,6 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 

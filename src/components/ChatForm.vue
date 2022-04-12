@@ -7,6 +7,7 @@
         placeholder="Input Text"
         v-model.trim="msg"
         rows="1"
+        no-resize
         @keyup.enter="submitMessage"/>
       </b-col>
     <div @click="submitMessage" 

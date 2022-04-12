@@ -1,7 +1,7 @@
 <template>
-    <div>
-        <div class="chat">
-            <chat-list :msgs="msgData"></chat-list>
+    <div v-chat-scroll="{always: false, smooth: true}">
+        <div class="chat" v-chat-scroll="{always: false, smooth: true}">
+            <chat-list :msgs="msgData" :username="username" v-chat-scroll="{always: false, smooth: true}"></chat-list>
             <chat-form @submitMessage="sendMessage"></chat-form>
         </div>
     </div>
@@ -18,6 +18,7 @@
         },
         mounted() {
             console.log("tring to connect websocket")
+            
             this.id = this.$route.params.id;
             var socket = new SockJS("http://localhost:8080/stomp/chat")
             this.stompClient = Stomp.over(socket)
@@ -27,11 +28,9 @@
                     this.connected = true;
                     console.log(frame)
                     this.stompClient
-                        .subscribe("/excahnge/Queueplay.exchange." + this.id +"/lobby."+this.id ,function(content){
-                          const paylodad = JSON.parse(content.body);
-                          console.log(paylodad)
-
-
+                        .subscribe("/exchange/Queueplay.exchange." + this.id +"/lobby."+this.id ,(content) =>{
+                            console.log(content)
+                            this.msgData.push(JSON.parse(content.body))
                         },{'auto-delete':true,'durable':false});
 
                 }, error =>{
@@ -45,18 +44,18 @@
             ChatForm
         },
         methods: {
-          
             sendMessage(msg) {
               var data = JSON.stringify({
-                'username':'CallFromMe',
+                'username':this.username,
                 'message':msg,
-                
-              })
+              }
+)
 
               console.log(data)
               this.stompClient.send("/pub/Queueplay."+this.id,data,{})
             },    
         },
+        props:['username']
     }
 </script>
 
