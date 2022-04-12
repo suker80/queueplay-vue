@@ -44,7 +44,6 @@
                 name:'',
                 isLogin :false
 
-
             }
         },
         methods: {
@@ -70,8 +69,12 @@
                         localStorage.setItem("token",token)
 
                         
+
+                        self.$emit('login',response.data)
+                        self.$router.push('/')
                     }})
                 
+              
 
             }
             
